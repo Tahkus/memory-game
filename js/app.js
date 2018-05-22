@@ -5,7 +5,7 @@
 let card = document.getElementsByClassName('card')
 let cards = [...card]
 let deck = document.querySelector('.deck')
-let movesNumber = document.querySelector('.moves')
+let movesCounter = document.querySelector('.moves')
 let matchedCardNum = 0
 let matchedCards = []
 let openCardsList = []
@@ -49,6 +49,7 @@ function rearrangeCards(cards) {
 function newGame(cards) {
   rearrangeCards();
   moves = 0;
+  movesCounter.textContent = moves;
   matchedCards = [];
   matchedCardNum = 0;
   openCardsList = [];
@@ -67,9 +68,11 @@ function cardClicked(event) {
   this.classList.add('open', 'show');
   if (openCardsList.length === 2 && openCardsList[0].innerHTML === openCardsList[1].innerHTML) {
     match();
+    addMoves();
   }
   if (openCardsList.length === 2 && openCardsList[0].innerHTML != openCardsList[1].innerHTML) {
     noMatch();
+    addMoves();
   }
   if (!watch.isOn) {
     watch.start();
@@ -93,6 +96,12 @@ function noMatch() {
     openCardsList[1].classList.remove('open', 'show');
     openCardsList = [];
 };
+
+// Adding moves
+function addMoves() {
+  moves++;
+  movesCounter.textContent = moves;
+}
 
 // Timer/stopwatch function
 function stopWatch(elem) {
