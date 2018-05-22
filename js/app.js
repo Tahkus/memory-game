@@ -101,7 +101,21 @@ function noMatch() {
 function addMoves() {
   moves++;
   movesCounter.textContent = moves;
-}
+  removeStar();
+};
+
+// Removing stars from star rating
+function removeStar() {
+  if (moves > 15) {
+    document.querySelector('.three').innerHTML = '<i></i>';
+  };
+  if (moves > 30) {
+    document.querySelector('.two').innerHTML = '<i></i>';
+  };
+  if (moves > 45) {
+    document.querySelector('.one').innerHTML = '<i></i>';
+  };
+};
 
 // Timer/stopwatch function
 function stopWatch(elem) {
