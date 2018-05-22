@@ -9,12 +9,9 @@ let movesNumber = document.querySelector('.moves')
 let matchedCardNum = 0
 let matchedCards = []
 let openCardsList = []
-let timer = document.querySelector('.timer')
-let time = '00:00'
-let seconds = 0
-let minutes = 0
-let hours = 0
 let moves = 0
+const timer = document.querySelector('.timer')
+let watch = new stopWatch(timer);
 let shuffledCards = shuffle(cards)
 let initialClick = 0
 const restartButton = document.querySelector('.restart')
@@ -55,10 +52,13 @@ function newGame(cards) {
   matchedCards = [];
   matchedCardNum = 0;
   openCardsList = [];
-  timer.innerHTML = '00:00';
   document.querySelector('.one').innerHTML = '<i class="fa fa-star"></i>';
   document.querySelector('.two').innerHTML = '<i class="fa fa-star"></i>';
   document.querySelector('.three').innerHTML = '<i class="fa fa-star"></i>';
+  if (watch.isOn) {
+    watch.stop();
+  }
+  watch.reset();
 };
 
 // Things that happen when a card is clicked on
@@ -70,6 +70,9 @@ function cardClicked(event) {
   }
   if (openCardsList.length === 2 && openCardsList[0].innerHTML != openCardsList[1].innerHTML) {
     noMatch();
+  }
+  if (!watch.isOn) {
+    watch.start();
   }
 };
 
@@ -90,6 +93,71 @@ function noMatch() {
     openCardsList[1].classList.remove('open', 'show');
     openCardsList = [];
 };
+
+// Timer/stopwatch function
+function stopWatch(elem) {
+  let time = 0;
+  let interval;
+  let offset;
+
+  function update() {
+    if (watch.isOn) {
+      time += delta();
+    }
+    let formattedTime = timeFormatter(time);
+    elem.textContent = formattedTime;
+  };
+
+  function delta() {
+    let now = Date.now();
+    let timePassed = now - offset;
+    offset = now;
+    return timePassed;
+  };
+
+  function timeFormatter(timeInMilliseconds) {
+    let time = new Date(timeInMilliseconds);
+    let minutes = time.getMinutes().toString();
+    let seconds = time.getSeconds().toString();
+    let milliseconds = time.getMilliseconds().toString();
+
+    if (minutes.length < 2) {
+      minutes = '0' + minutes;
+    }
+    if (seconds.length < 2) {
+      seconds = '0' + seconds;
+    }
+    while (milliseconds.length < 3) {
+      milliseconds = '0' + milliseconds;
+    }
+
+    return minutes + ':' + seconds + '.' + milliseconds;
+  };
+
+  this.isOn = false;
+
+  this.start = function() {
+    if (!this.isOn) {
+      interval = setInterval(update, 10);
+      offset = Date.now();
+      this.isOn = true;
+    }
+  };
+
+  this.stop = function() {
+    if (this.isOn) {
+      clearInterval(interval);
+      interval = null;
+      this.isOn = false;
+    }
+  };
+
+  this.reset = function() {
+    time = 0;
+    update();
+  };
+};
+
 
 // EVENT LISTENERS
 restartButton.addEventListener('click', function() {
