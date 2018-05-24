@@ -10,10 +10,12 @@ let matchedCardNum = 0
 let matchedCards = []
 let openCardsList = []
 let moves = 0
+let starNum = 0
+let modalButton
+let popup = document.querySelector('.modal-popup');
 const timer = document.querySelector('.timer')
 let watch = new stopWatch(timer);
 let shuffledCards = shuffle(cards)
-let initialClick = 0
 const restartButton = document.querySelector('.restart')
 
 
@@ -79,6 +81,29 @@ function cardClicked(event) {
   }
 };
 
+// Game won
+function winGame() {
+  if (matchedCardNum === 8) {
+    let modal = document.createElement('p');
+    let modalButton = document.createElement('button');
+    modal.innerHTML = '<p>Congratulations! Your time was <strong>' + timer.textContent +
+                      '</strong>. Your star rating is <strong>' + starNum +
+                      '</strong>. <br> Would you like to play again?</p>';
+    modal.classList.add('popup-text');
+    modalButton.classList.add('play-button');
+    modalButton.textContent = 'Play Again';
+    popup.appendChild(modal);
+    popup.appendChild(modalButton);
+    watch.stop();
+    modalButton.onclick = function(){
+      shuffle(cards);
+      newGame();
+      popup.removeChild(modal);
+      popup.removeChild(modalButton);
+    }
+  }
+};
+
 // Matching cards function
 function match() {
     matchedCards.push(openCardsList[0]);
@@ -88,6 +113,7 @@ function match() {
     openCardsList[0].classList.remove('open', 'show');
     openCardsList[1].classList.remove('open', 'show');
     openCardsList = [];
+    matchedCardNum++;
 };
 
 // No-match function
@@ -106,14 +132,16 @@ function addMoves() {
 
 // Removing stars from star rating
 function removeStar() {
+  if (moves <= 15) {
+    starNum = 3;
+  }
   if (moves > 15) {
     document.querySelector('.three').innerHTML = '<i></i>';
+    starNum = 2;
   };
   if (moves > 30) {
     document.querySelector('.two').innerHTML = '<i></i>';
-  };
-  if (moves > 45) {
-    document.querySelector('.one').innerHTML = '<i></i>';
+    starNum = 1;
   };
 };
 
@@ -184,10 +212,13 @@ function stopWatch(elem) {
 
 // EVENT LISTENERS
 restartButton.addEventListener('click', function() {
-  shuffle(cards)
+  shuffle(cards);
   newGame();
+  popup.removeChild(modal);
+  popup.removeChild(modalButton);
 });
 
 for (let shuffledCard of shuffledCards) {
   shuffledCard.addEventListener('click', cardClicked);
+  shuffledCard.addEventListener('click', winGame);
 };
