@@ -112,3 +112,31 @@ h1 {
     display: inline-block;
     margin: 0px 30px;
 }
+
+/*
+ * Styles for modal Popup
+ */
+
+ .popup-text {
+   text-align: center;
+   font-size: 20px;
+ }
+
+ .modal-popup {
+   background: linear-gradient(160deg, #02ccba 0%, #aa7ecd 100%);
+   border-radius: 10px;
+   box-shadow: 12px 15px 20px 0 rgba(46, 61, 73, 0.5);
+   width: 660px;
+}
+
+ button {
+   width: 180px;
+   height: 40px;
+   border-radius: 10px;
+   font-size: 20px;
+   font-weight: bold;
+   background-color: #aa7ecd;
+   box-shadow: 12px 15px 20px 0 rgba(46, 61, 73, 0.5);
+   margin: 20px;
+   border-color: #aa7ecd;
+ }
