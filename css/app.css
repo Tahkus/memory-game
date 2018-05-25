@@ -83,6 +83,9 @@ h1 {
     pointer-events: none;
 }
 
+.deck .card.disable {
+  pointer-events: none;
+}
 /*
  * Styles for the Score Panel
  */

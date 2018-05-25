@@ -111,19 +111,23 @@ function match() {
     matchedCardNum++;
     openCardsList[0].classList.add('match');
     openCardsList[1].classList.add('match');
+    disable();
     setTimeout(function() {
       openCardsList[0].classList.remove('open', 'show');
       openCardsList[1].classList.remove('open', 'show');
       openCardsList = [];
+      enable();
     }, 800)
 };
 
 // No-match function
 function noMatch() {
+  disable();
   setTimeout(function() {
     openCardsList[0].classList.remove('open', 'show');
     openCardsList[1].classList.remove('open', 'show');
     openCardsList = [];
+    enable();
   }, 800)
 };
 
@@ -147,6 +151,25 @@ function removeStar() {
     document.querySelector('.two').innerHTML = '<i></i>';
     starNum = 1;
   };
+};
+
+// Disable card from click events temporarily
+
+function disable() {
+  for (let shuffledCard of shuffledCards) {
+    shuffledCard.classList.add('disable');
+  };
+};
+
+// Enable card for click events & disable matched cards
+
+function enable() {
+  for (let shuffledCard of shuffledCards) {
+    shuffledCard.classList.remove('disable');
+  };
+  for (let matchedCard of matchedCards) {
+    matchedCard.classList.add('disable');
+  }
 };
 
 // Timer/stopwatch function
