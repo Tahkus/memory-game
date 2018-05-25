@@ -108,19 +108,23 @@ function winGame() {
 function match() {
     matchedCards.push(openCardsList[0]);
     matchedCards.push(openCardsList[1]);
+    matchedCardNum++;
     openCardsList[0].classList.add('match');
     openCardsList[1].classList.add('match');
-    openCardsList[0].classList.remove('open', 'show');
-    openCardsList[1].classList.remove('open', 'show');
-    openCardsList = [];
-    matchedCardNum++;
+    setTimeout(function() {
+      openCardsList[0].classList.remove('open', 'show');
+      openCardsList[1].classList.remove('open', 'show');
+      openCardsList = [];
+    }, 800)
 };
 
 // No-match function
 function noMatch() {
+  setTimeout(function() {
     openCardsList[0].classList.remove('open', 'show');
     openCardsList[1].classList.remove('open', 'show');
     openCardsList = [];
+  }, 800)
 };
 
 // Adding moves
