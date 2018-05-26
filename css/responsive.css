@@ -1,0 +1,10 @@
+.container {
+  flex-wrap: wrap;
+}
+
+@media screen and (min-width: 359) {
+
+.deck {
+    background-color: #02ccba;
+  }
+}
