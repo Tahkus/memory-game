@@ -170,7 +170,7 @@ function enable() {
   }
 }
 
-// Timer/stopwatch function
+// Timer/stopwatch function from tutorial https://www.youtube.com/watch?v=jRhB1IG7uAw&t=235s
 function stopWatch(elem) {
   let time = 0;
   let interval;
