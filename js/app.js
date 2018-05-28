@@ -154,7 +154,6 @@ function removeStar() {
 };
 
 // Disable card from click events temporarily
-
 function disable() {
   for (let shuffledCard of shuffledCards) {
     shuffledCard.classList.add('disable');
@@ -162,7 +161,6 @@ function disable() {
 };
 
 // Enable card for click events & disable matched cards
-
 function enable() {
   for (let shuffledCard of shuffledCards) {
     shuffledCard.classList.remove('disable');
@@ -238,6 +236,8 @@ function stopWatch(elem) {
 
 
 // EVENT LISTENERS
+
+// Listener for the restart button in score panel
 restartButton.addEventListener('click', function() {
   shuffle(cards);
   newGame();
@@ -245,6 +245,7 @@ restartButton.addEventListener('click', function() {
   popup.removeChild(modalButton);
 });
 
+//Listeners for cards being clicked
 for (let shuffledCard of shuffledCards) {
   shuffledCard.addEventListener('click', cardClicked);
   shuffledCard.addEventListener('click', winGame);
