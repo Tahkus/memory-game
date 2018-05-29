@@ -10,6 +10,7 @@ moves as possible.
 * [About](#about)
 * [Installation](#installation)
 * [Usage](#usage)
+* [License](#license)
 
 
 ## About
