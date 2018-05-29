@@ -8,7 +8,7 @@ moves as possible.
 ## Table of Contents
 
 * [About](#about)
-* [Installation] (#installation)
+* [Installation](#installation)
 * [Usage](#usage)
 
 
