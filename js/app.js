@@ -238,6 +238,8 @@ function stopWatch(elem) {
 
 // Listener for the restart button in score panel
 restartButton.addEventListener('click', function() {
+  let modal = document.querySelector('.popup-text')
+  let modalButton = document.querySelector('.play-button')
   shuffle(cards);
   newGame();
   popup.removeChild(modal);
