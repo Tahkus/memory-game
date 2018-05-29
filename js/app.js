@@ -67,7 +67,7 @@ function newGame(cards) {
 // Things that happen when a card is clicked on
 function cardClicked(event) {
   openCardsList.push(this);
-  this.classList.add('open', 'show');
+  this.classList.add('open', 'show', 'disable');
   if (openCardsList.length === 2 && openCardsList[0].innerHTML === openCardsList[1].innerHTML) {
     match();
     addMoves();
@@ -79,7 +79,7 @@ function cardClicked(event) {
   if (!watch.isOn) {
     watch.start();
   }
-}
+};
 
 // Game won
 function winGame() {
@@ -118,7 +118,7 @@ function match() {
       openCardsList = [];
       enable();
     }, 800)
-}
+};
 
 // No-match function
 function noMatch() {
@@ -129,7 +129,7 @@ function noMatch() {
     openCardsList = [];
     enable();
   }, 800)
-}
+};
 
 // Adding moves
 function addMoves() {
@@ -243,10 +243,10 @@ restartButton.addEventListener('click', function() {
   newGame();
   popup.removeChild(modal);
   popup.removeChild(modalButton);
-})
+});
 
 //Listeners for cards being clicked
 for (let shuffledCard of shuffledCards) {
   shuffledCard.addEventListener('click', cardClicked);
   shuffledCard.addEventListener('click', winGame);
-}
+};
