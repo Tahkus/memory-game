@@ -230,3 +230,9 @@ h1 {
      width: 345px;
    }
  }
+
+ @media screen and (min-width: 780px) {
+   .modal-popup {
+     width: 624px;
+   }
+ }
