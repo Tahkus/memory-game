@@ -1,7 +1,6 @@
 /*
  * Create a list that holds all of your cards
  */
-// const cardSymbols = ['fa fa-diamond', 'fa fa-paper-plane-o', 'fa fa-anchor', 'fa fa-bolt', 'fa fa-cube', 'fa fa-leaf', 'fa fa-bicycle', 'fa fa-bomb', 'fa fa-diamond', 'fa fa-paper-plane-o', 'fa fa-anchor', 'fa fa-bolt', 'fa fa-cube', 'fa fa-leaf', 'fa fa-bicycle', 'fa fa-bomb']
 const card = document.getElementsByClassName('card');
 const cards = [...card];
 const deck = document.querySelector('.deck');
@@ -43,7 +42,7 @@ window.onload = newGame();
 function rearrangeCards(cards) {
   for (let i = 0; i < shuffledCards.length; i++) {
     deck.appendChild(shuffledCards[i]);
-    shuffledCards[i].classList.remove('open', 'show', 'match');
+    shuffledCards[i].classList.remove('open', 'show', 'match', 'disable');
   }
 }
 
